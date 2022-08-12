@@ -1,0 +1,100 @@
+
+<mat-horizontal-stepper #stepper linear>
+  <br>
+  <br>
+  <!-- Revisar total -->
+  <mat-step label="Revisar total">
+    <table *ngIf="productos.length>0" mat-table [dataSource]="productos">
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Producto</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef>Cantidad</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cantidad}}</mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef> Categoria </th>
+        <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+      </ng-container>
+      <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.precio | currency}}</mat-cell>
+      </ng-container>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3121a9d599e4bc00c0d447cb0391eb09177d789
+      <ng-container matColumnDef="quitar">
+        <mat-header-cell *matHeaderCellDef>Quitar</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button (click)="quitar(element)" mat-icon-button color="warn">
+            <mat-icon>
+              delete
+            </mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </table>
+    &nbsp;
+    <h2>Total: {{total() | currency}}</h2>
+    <div align="right">
+      <a routerLink="/tienda" class="comprar" mat-raised-button color="secondary">
+        Regresar a la tienda
+      </a>
+      &nbsp;&nbsp;
+      <button matStepperNext mat-raised-button color="primary">Continuar
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </mat-step>
+
+  <!-- Datos del Usuario -->
+  <div class="wrapper">
+    <mat-card>
+      <mat-step label="Datos del cliente">
+        <!-- <p style="text-align: center; border-radius: 60px;">
+          <mat-form-field>
+            <input matInput [(ngModel)]="clienteModel.nombre" type="text" (keyup.space)="noEspaciosAlPrincipio()" [(ngModel)]="search" placeholder="Nombre completo" minlength="3"
+              maxlength="100">
+            <mat-error *ngIf="isValidField('nombre')">
+              {{ getErrorMessage('nombre') }}
+            </mat-error>
+          </mat-form-field>
+        </p> -->
+        <p style="text-align: center;">
+          <mat-form-field>
+            <textarea rows="10" matInput [(ngModel)]="clienteModel.direccion" (keyup.space)="noEspaciosAlPrincipio2()" [(ngModel)]="search2" placeholder="Dirección de envío"
+              minlength="3" maxlength="400"></textarea>
+          </mat-form-field>
+        </p>
+        <div align="right">
+          <button matStepperPrevious mat-raised-button color="primary">
+            <mat-icon>arrow_back</mat-icon>
+            Volver
+          </button>
+          &nbsp;
+          <button (click)="revisarYTerminar(stepper)" mat-raised-button color="warn">Terminar compra
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+    </mat-card>
+  </div>
+ 
+  
+  <!-- Finalisación de la compra -->
+  <mat-step label="Gracias por su compra">
+    <div *ngIf="compraTerminada">
+      <h2 class="mat-display-3" style="text-align: center;">¡Gracias por su compra!</h2>
+      <div align="center"><img src="assets/paquetes.gif" width="380px" alt="Compra terminada"></div>
+      <p style="text-align: center;">Su paquete llegará a la dirección especificada en los siguientes días</p>
+    </div>
+    <div *ngIf="!compraTerminada">
+      Por favor, rellene los formularios de los pasos anteriores
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

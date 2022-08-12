@@ -1,0 +1,39 @@
+
+
+<mat-card>
+  <mat-card-content>
+  <h1>Inventario de Productos <b>The Game Starts</b></h1>
+<div style="float: right;">
+<button (click)="navegarAFormulario()"  style="background-color: rgb(201, 151, 250);" mat-raised-button><mat-icon color="primary">list_alt</mat-icon> Agregar producto</button>
+&nbsp;&nbsp;
+<button (click)="navegarAVentas()"  style="background-color: rgb(201, 151, 250);" mat-raised-button><mat-icon color="primary">local_shipping</mat-icon> Ver ventas</button>
+</div>
+<br>
+<br>
+<table class="mat-elevation-z13" *ngIf="productos.length>0" mat-table [dataSource]="productos">
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="descripcion">
+    <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.descripcion}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="precio">
+    <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.precio | currency}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="eliminar">
+    <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button cla (click)="eliminar(element)" mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+</table>
+</mat-card-content>
+</mat-card>
